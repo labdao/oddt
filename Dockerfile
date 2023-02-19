@@ -25,6 +25,11 @@ RUN cmake ../openbabel-3.1.1 \
     -DCMAKE_BUILD_TYPE=DEBUG
 RUN make -j4
 RUN make install
+
+# download and install rf-score VS binary
+RUN wget http://wojcikowski.pl/travis/rf-score-vs_v1.0_linux_2.7.zip
+RUN unzip rf-score-vs_v1.0_linux_2.7.zip -d rf-score-vs
+
 # Set the working directory
 WORKDIR /app
 
@@ -37,8 +42,8 @@ RUN pip3 install oddt
 
 # Copy additional files
 COPY . .
-RUN oddt_cli testdata/6d08_ligand.sdf \
-    --receptor testdata/6d08_protein_processed.pdb \
+RUN oddt_cli /app/testdata/6d08_ligand.sdf \
+    --receptor /app/testdata/6d08_protein_processed.pdb \
     #--score autodock_vina \
     #--score rfscore \
     --score rfscore_v1 \
@@ -48,4 +53,8 @@ RUN oddt_cli testdata/6d08_ligand.sdf \
     #--score pleclinear \
     #--score plecnn \
     #--score plecrf \
-    -O testdata/6d08_ligand_scored.sdf
+    -O /app/testdata/6d08_ligand_scored.sdf && \
+    && cd /rf-score-vs && \
+    ./rf-score-vs --receptor /app/testdata/6d08_protein_processed.pdb \
+    /app/testdata/6d08_ligand_scored.sdf \
+    -O /app/testdata/6d08_ligand_rescored.sdf
