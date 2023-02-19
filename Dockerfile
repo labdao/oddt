@@ -40,7 +40,7 @@ COPY . .
 RUN oddt_cli testdata/6d08_ligand.sdf \
     --receptor testdata/6d08_protein_processed.pdb \
     #--score autodock_vina \
-    --score rfscore \
+    #--score rfscore \
     --score rfscore_v1 \
     --score rfscore_v2 \
     --score rfscore_v3 \
