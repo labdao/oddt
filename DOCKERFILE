@@ -2,10 +2,12 @@ FROM continuumio/miniconda3:22.11.1
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    g++ \
     python3-dev \
     libeigen3-dev \
     wget \
-    cmake
+    cmake \
+    less
 
 # Installing OpenBabel
 RUN wget https://github.com/openbabel/openbabel/releases/download/openbabel-3-1-1/openbabel-3.1.1-source.tar.bz2
@@ -35,3 +37,15 @@ RUN pip3 install oddt
 
 # Copy additional files
 COPY . .
+RUN oddt_cli testdata/6d08_ligand.sdf \
+    --receptor testdata/6d08_protein_processed.pdb \
+    #--score autodock_vina \
+    --score rfscore \
+    --score rfscore_v1 \
+    --score rfscore_v2 \
+    --score rfscore_v3 \
+    --score nnscore \
+    --score pleclinear \
+    #--score plecnn \
+    --score plecrf \
+    -O testdata/6d08_ligand_scored.sdf
