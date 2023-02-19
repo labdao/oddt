@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
     libeigen3-dev \
     wget \
     cmake \
-    less
+    less \
+    unzip
 
 # Installing OpenBabel
 RUN wget https://github.com/openbabel/openbabel/releases/download/openbabel-3-1-1/openbabel-3.1.1-source.tar.bz2
