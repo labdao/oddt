@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:22.11.1
+FROM --platform=linux/amd64 continuumio/miniconda3:22.11.1
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
