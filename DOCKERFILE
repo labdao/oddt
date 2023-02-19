@@ -45,7 +45,7 @@ RUN oddt_cli testdata/6d08_ligand.sdf \
     --score rfscore_v2 \
     --score rfscore_v3 \
     --score nnscore \
-    --score pleclinear \
+    #--score pleclinear \
     #--score plecnn \
-    --score plecrf \
+    #--score plecrf \
     -O testdata/6d08_ligand_scored.sdf
