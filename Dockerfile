@@ -28,8 +28,8 @@ RUN make -j4
 RUN make install
 
 # download and install rf-score VS binary
-RUN wget http://wojcikowski.pl/travis/rf-score-vs_v1.0_linux_2.7.zip
-RUN unzip rf-score-vs_v1.0_linux_2.7.zip -d rf-score-vs
+#RUN wget http://wojcikowski.pl/travis/rf-score-vs_v1.0_linux_2.7.zip
+#RUN unzip rf-score-vs_v1.0_linux_2.7.zip -d rf-score-vs
 
 # Set the working directory
 WORKDIR /app
@@ -54,8 +54,4 @@ RUN oddt_cli /app/testdata/6d08_ligand.sdf \
     #--score pleclinear \
     #--score plecnn \
     #--score plecrf \
-    -O /app/testdata/6d08_ligand_scored.sdf && \
-    && cd /rf-score-vs && \
-    ./rf-score-vs --receptor /app/testdata/6d08_protein_processed.pdb \
-    /app/testdata/6d08_ligand_scored.sdf \
-    -O /app/testdata/6d08_ligand_rescored.sdf
+    -O /app/testdata/6d08_ligand_scored.sdf
